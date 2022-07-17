@@ -1,0 +1,122 @@
+<!-- Developed only User story 4 given in case study for front end  -->
+<div class="row">
+    <div class="col-sm-5">
+
+    </div>
+    <div class="col-sm-3">
+        <mat-toolbar class="main">
+            <mat-toolbar-row>
+                <a><span>E-Auction Application</span></a>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <mat-toolbar class="second">
+            <span>Auction Product and Bid Details</span>
+        </mat-toolbar>
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+    <div class="col-sm-4">
+
+    </div>
+</div>
+
+<div class="form-container">
+    <mat-card>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-4">
+                    <mat-label><b>Product Id:</b> </mat-label>&nbsp;&nbsp;
+                    <input matInput name="productId" id="productId" placeholder="Product ID" [(ngModel)]="productId"
+                        required>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <button type="submit" mat-raised-button class="mat-primary" (click)="getBidDetails()">Get All
+                        Bids</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div *ngIf="bidsExist">
+    <mat-card class="bidTable">
+        <mat-card-header>
+            <mat-title-header>
+                <h3><b>Bid Details</b></h3>
+            </mat-title-header>
+        </mat-card-header>
+        <br />
+        <mat-card-content>
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort #bidTbSort="matSort">
+
+                    <ng-container matColumnDef="Bid Id" id="id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Bid Id</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.bid.id }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Buyer First Name" id="firstName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Buyer First Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.bid.firstName}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Buyer Last Name" id="lastName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Buyer Last Name</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.bid.lastName }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Buyer State" id="state">
+                        <mat-header-cell *matHeaderCellDef>Buyer State</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.bid.state}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Buyer City" id="city">
+                        <mat-header-cell *matHeaderCellDef>Buyer City</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.bid.city}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Bid Amount" id="bidAmount">
+                        <mat-header-cell *matHeaderCellDef>Bid Amount</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.bid.bidAmount }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Product Short Description" id="shortDescription">
+                        <mat-header-cell *matHeaderCellDef>Product Short Description</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.product.shortDescription }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Product Detailed Description" id="detailedDescription">
+                        <mat-header-cell *matHeaderCellDef>Product Detailed Description</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.product.detailedDescription}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Product Category" id="category">
+                        <mat-header-cell *matHeaderCellDef>Product Category</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.product.category}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Product Starting Price" id="startingPrice">
+                        <mat-header-cell *matHeaderCellDef>Product Starting Price</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.product.startingPrice }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Product Bid End Date" id="bidEndDate">
+                        <mat-header-cell *matHeaderCellDef>Bid End Date</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{ row.product.bidEndDate | date: 'MM/dd/YYYY'}}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+                </mat-table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
